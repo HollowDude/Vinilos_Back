@@ -18,9 +18,15 @@ from django.contrib import admin
 from django.urls import include, path
 import tattoos.urls
 import piercings.urls
+from Vinilos import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tattoos/', include(tattoos.urls)),
     path('piercings/', include(piercings.urls))
 ]
+
+
+if settings.DEBUG:  # Solo sirve archivos multimedia en desarrollo
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
